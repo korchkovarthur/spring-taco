@@ -56,8 +56,16 @@ public class DesignTacoController {
 	private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
 		return ingredients.stream().filter(x -> x.getType().equals(type)).toList();
 	}
+
+
+@PostMapping
+public String processTaco (Taco taco, @ModelAttribute TacoOrder tacoOrder) {
+	tacoOrder.addTaco(taco);
+	log.info("Processing taco: {}", taco);
+	return "redirect:/orders/current";
 }
 
+}
 //	private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
 //		List<Ingredient> filteredList = new ArrayList<>();
 //		for (Ingredient i : ingredients) {
